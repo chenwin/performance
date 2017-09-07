@@ -1,0 +1,80 @@
+#!/usr/bin/expect
+
+if { [llength $argv] < 4} {  
+    puts "Usage:"  
+    puts "$argv0 server_ip local_file passwd option"  
+    exit 1  
+}  
+
+set server_ip [lindex $argv 0]  
+set local_file [lindex $argv 1] 
+set passwd  [lindex $argv 2]
+set option  [lindex $argv 3]
+set timeout 20
+
+if {$option == "scp"} {
+    spawn scp -r $local_file $server_ip:/usr/bin
+
+    expect {
+        "*assword:*"
+        {
+            set timeout 1000
+            send "$passwd\r"
+            exp_continue
+        }
+        "*es/no)?*"
+        {
+            send "yes\r"
+            exp_continue
+        }
+        timeout {
+            puts "connect is timeout"
+            exit 3
+        }
+    }
+} else {
+    if {$option == "ssh"} {
+	    spawn ssh $server_ip "netserver;qperf &"
+	    expect {
+            "*assword:*"
+            {
+                set timeout 1000
+                send "$passwd\r"
+                exp_continue
+            }
+            "*es/no)?*"
+            {
+                send "yes\r"
+                exp_continue
+            }
+            timeout {
+                puts "connect is timeout"
+                exit 3
+            }
+        }
+	} else {
+	    if {$option == "rm"} {
+		    spawn ssh $server_ip "rm -rf /usr/bin/netserver;rm -rf /usr/bin/netperf;rm -rf /usr/bin/qperf"
+	        expect {
+                "*assword:*"
+                {
+                    set timeout 1000
+                    send "$passwd\r"
+                    exp_continue
+                }
+                "*es/no)?*"
+                {
+                    send "yes\r"
+                    exp_continue
+                }
+                timeout {
+                    puts "connect is timeout"
+                    exit 3
+                }
+            }
+		} else {
+		    send_user "bad arg:$option\n"
+	        exit
+		}
+	} 
+}

@@ -1,0 +1,147 @@
+#! /usr/bin/expect -f
+
+###########################################################
+# 为fsp环境添加root登陆权限以及添加节点之间互信           #
+# @author  w00282946                                      #
+# @details 登陆到每一台节点上，将/etc/ssh/sshd_config中间 #
+#          的PermitRootLogin注释掉                        #
+#          使用ssh-keygen生成公钥密钥，并使用ssh-copy-id  #
+#          将公钥复制到主机上                             #
+###########################################################
+
+
+log_user        0
+set count       0
+set timeout     10
+set fspUser     "fsp"
+set fspPwd      "fsp200@HW"
+set targetUser  "root"
+set targetPwd   "cnp200@HW"
+set host        [lindex $argv 0]
+
+proc trust {host} {
+    global targetUser
+    global targetPwd
+    if {[file isfile $::env(HOME)/.ssh/id_rsa.pub]} { } else {
+        spawn ssh-keygen -b 1024 -t rsa
+        expect {
+            "*@*:*>" {
+                send "\r"
+            }
+            "*:* #*" {
+                send "\r"
+            }
+            "*save the key*" {
+                send "\r"
+                exp_continue
+            }
+            "*verwrite*" {
+                send "y\r"
+                exp_continue
+            }
+            "*passphrase*" {
+                send "\r"
+                exp_continue
+            }
+            timeout  {
+                send_user "generate key failed\n"
+                close
+            }
+        }
+    }
+    spawn ssh-copy-id -i $::env(HOME)/.ssh/id_rsa.pub $targetUser@$host
+    expect {
+        "*@*:*>" {
+            send "\r"
+        }
+        "*:* #*" {
+            send "\r"
+        }
+        "*continue connecting*" {
+            send "yes\r"
+            exp_continue
+        }
+        "*assword*" {
+            send "${targetPwd}\r"
+            exp_continue
+        }
+        "*passphrase*" {
+            send "\r"
+            exp_continue
+        }
+        "locked." {
+            sleep 300
+            close
+            spawn ssh-copy-id -i $::env(HOME)/.ssh/id_rsa.pub $targetUser@$host
+            send_user "host $host locked, retry in next 300 seconds"
+            exp_continue
+        }
+        timeout  {
+            send_user "copy key to $host failed\n"
+            close
+        }
+    }
+}
+
+proc unlock {host} {
+    global fspUser
+    global fspPwd
+    global targetUser
+    global targetPwd
+    spawn ssh $fspUser@$host
+    expect {
+        "*@*:*>" {
+            send "\r"
+        }
+        "Are you sure you want to continue connecting (yes/no)?" {
+            send "yes\r"
+            exp_continue
+        }
+        "*assword:" {
+            send "$fspPwd\r"
+            exp_continue
+        }
+        "locked." {
+            sleep 300
+            close
+            spawn ssh $fspUser@$host
+            send_user "host $host locked, retry in next 300 seconds"
+            exp_continue
+        }
+        "*No route to host*" {
+            send_user "unlock failed, No route to host $host\n"
+            close
+        }
+        "Permission denied*" {
+            send_user "unlock failed, Permission denied $host\n"
+            close
+        }
+        timeout  {
+            send_user "unlock failed, Connect timeout $host\n"
+            close
+        }
+    }
+    send "su $targetUser\r"
+    expect {
+        "*assword:" {
+            send "$targetPwd\r"
+        }
+        "locked." {
+            sleep 300
+            send "su $targetUser\r"
+            exp_continue
+        }
+    }
+    expect "*:* #*"
+    send "sed -i \"s/PermitRootLogin/#PermitRootLogin/g\" /etc/ssh/sshd_config\r"
+    expect "*:* #*"
+    send "service sshd restart\r"
+    expect "*:* #*"
+    send "exit\r"
+    send "exit\r"
+    expect eof
+}
+
+unlock $host
+trust $host
+
