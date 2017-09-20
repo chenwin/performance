@@ -4,3 +4,11 @@ PermitRootLogin yes
 PasswordAuthentication yes
 
 service sshd restart
+
+fio 官网地址：http://freshmeat.net/projects/fio/
+wget http://brick.kernel.dk/snaps/fio-2.1.10.tar.gz
+yum install libaio-devel
+tar -zxvf fio-2.1.10.tar.gz
+cd fio-2.1.10
+make
+make install
