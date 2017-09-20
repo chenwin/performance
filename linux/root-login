@@ -12,3 +12,10 @@ tar -zxvf fio-2.1.10.tar.gz
 cd fio-2.1.10
 make
 make install
+
+bw=47000KB/s, iops=5874
+fio中的I/O延迟包括三种：slat，clat，lat
+关系是 lat = slat + clat。
+slat 表示fio submit某个I/O的延迟。
+clat 表示fio complete某个I/O的延迟。
+lat 表示从fio将请求提交给内核，再到内核完成这个I/O为止所需要的时间
