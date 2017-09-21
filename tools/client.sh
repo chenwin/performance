@@ -65,6 +65,8 @@ then
 	then
 	    echo $title > $RESULT_HOME/net.csv
 	fi
+else
+    echo $title > $RESULT_HOME/net.csv
 fi
 
 result=""
