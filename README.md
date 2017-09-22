@@ -14,6 +14,6 @@
 
     git add .
     git commit -m 'vm-iops'
-    git config --global user.name chenwin
+    git config --global user.name "XXX"
     git config --global user.email "XXX"
     git push -u origin master
