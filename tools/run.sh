@@ -22,7 +22,8 @@ function geekbench3_run
     mem_m=`grep "Memory Score"         $RESULT | awk '{print $4}'`
     score_s=`grep "Geekbench Score"      $RESULT | awk '{print $3}'`
     score_m=`grep "Geekbench Score"      $RESULT | awk '{print $4}'`
-    echo $DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m >> $DIR/result/geekbench.csv
+    #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
+    echo $DATE-$CPU_INFO $int_s $float_s $int_m $float_m >> $DIR/result/geekbench.csv
 	echo "===>geekbench3 run successful,result in $DIR/result/geekbench3.csv,raw result in $DIR/result/raw/geekbench3..."
 }
 
