@@ -78,8 +78,11 @@ function stream_run
     scale=`grep "Scale:"        $RESULT | awk -F " " '{print $2}'`
     add=`grep "Add:" $RESULT | awk -F " " '{print $2}'` 
     triad=`grep "Triad:" $RESULT | awk -F " " '{print $2}'`
-    
-    echo "$copy $scale $add $triad" >> $DIR/result/stream.csv
+    copy_GB=`echo "scale=2;$copy/1024;" | bc`
+    scale_GB=`echo "scale=2;$scale/1024;" | bc`
+    add_GB=`echo "scale=2;$add/1024;" | bc`
+    triad_GB=`echo "scale=2;$triad/1024;" | bc`
+    echo "$copy_G $scale_G $add_G $triad_G" >> $DIR/result/stream.csv
     
 }
 
