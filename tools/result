@@ -1,0 +1,24 @@
+单核CPU整形
+单核CPU浮点
+#单核CPU内存
+#单核CPU综合
+多核CPU整形
+多核CPU浮点
+#多核CPU内存
+#多核CPU综合
+
+内存（GB/s）
+Copy:
+Scale:
+Add:
+Triad: 
+
+网络
+带宽：TCP 1440包长
+时延：TCP 1440包长
+PPS： UDP 64包长
+
+存储：
+IOPS: 8K小块32队列
+带宽：1M大块32队列
+时延：8K小块1队列
