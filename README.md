@@ -1,3 +1,6 @@
+#
+访问https://github.com/new 来Create a new repository
+
 # performance
 首次提交
 
