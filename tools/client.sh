@@ -83,19 +83,19 @@ do
 	result="$result $tcp_lat"
 done
 
-for len in ${udp_len[@]}
-do
-	udp_bw=`tac $RESULT_DIR/netperf_udp_${len}.log  |sed -n 2p|awk -F " " '{print $4}'`
-	echo udp_bandwidth_$len=$udp_bw >> $RESULT_DIR/net_raw.csv	
-	result="$result $udp_bw"
-done
+#for len in ${udp_len[@]}
+#do
+#	udp_bw=`tac $RESULT_DIR/netperf_udp_${len}.log  |sed -n 2p|awk -F " " '{print $4}'`
+#	echo udp_bandwidth_$len=$udp_bw >> $RESULT_DIR/net_raw.csv	
+#	result="$result $udp_bw"
+#done
 
-for len in ${udp_len[@]}
-do
-	udp_lat=`cat $RESULT_DIR/qperf_udp_${len}.log | grep latency | awk -F "=" '{print $2}'|tr -d " "`
-	echo udp_lat_$len=$udp_lat >> $RESULT_DIR/net_raw.csv
-	result="$result $udp_lat"
-   done		
+#for len in ${udp_len[@]}
+#do
+#	udp_lat=`cat $RESULT_DIR/qperf_udp_${len}.log | grep latency | awk -F "=" '{print $2}'|tr -d " "`
+#	echo udp_lat_$len=$udp_lat >> $RESULT_DIR/net_raw.csv
+#	result="$result $udp_lat"
+#done		
     
 for len in ${udp_len[@]}
 do
