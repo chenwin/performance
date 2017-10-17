@@ -10,7 +10,7 @@ function geekbench3_run
 	CPU_INFO=`cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F ":" '{print $2}'`
 	echo "CPUINFO= $CPU_INFO"
 	mkdir -p $DIR/result/raw/geekbench3
-	DATE=`date +"%Y%m%d_%I%M%S"`
+	DATE=`date +"%Y%m%d_%H%M%S"`
     RESULT=$DIR/result/raw/geekbench3/runlog-$DATE
     ./geekbench_x86_64 -n | tee $RESULT
     
@@ -68,7 +68,7 @@ function stream_run
     CPU_NUM=`more /proc/cpuinfo | grep "processor"|wc -l`
     export OMP_NUM_THREADS=$CPU_NUM
     
-    DATE=`date +"%Y%m%d_%I%M%S"`
+    DATE=`date +"%Y%m%d_%H%M%S"`
     mkdir -p $DIR/result/raw/stream
     RESULT=$DIR/result/raw/stream/runlog-$DATE
     
@@ -90,7 +90,7 @@ function unixbench_run
 {
     chmod -R 755 $DIR/UnixBench
     cd $DIR/UnixBench
-    DATE=`date +"%Y%m%d_%I%M%S"`
+    DATE=`date +"%Y%m%d_%H%M%S"`
     mkdir -p $DIR/result/raw/unixbench
     unixbench_log=$DIR/result/raw/unixbench/runlog-$DATE
     ./Run | tee $unixbench_log
