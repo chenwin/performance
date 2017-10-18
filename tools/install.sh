@@ -10,7 +10,7 @@ DIR="$( cd "$( dirname "$0"  )" && pwd  )"
 
 function base_config
 {
-    yum -y install unzip tar make gcc expect libaio
+    yum -y install unzip tar make gcc expect libaio bc 
     echo Y | apt-get install unzip tar automake make gcc expect
     service iptables stop
     chkconfig iptables off
