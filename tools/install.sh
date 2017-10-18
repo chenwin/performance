@@ -93,8 +93,9 @@ function stream_install
 
 function unixbench_install
 {
+    cd $DIR
     rm -rf $DIR/UnixBench
-    tar -xvf UnixBench.tar.gz
+    tar -xvf $DIR/UnixBench.tar.gz
     cd $DIR/UnixBench
     make
     if [ $? -ne 0 ]
