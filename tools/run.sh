@@ -108,13 +108,13 @@ function all_run
     geekbench3_run
     
     #3.run fio
-    fio_run
+    #fio_run
     
     #4.run stream
     stream_run
     
     #5.run unixbench
-    #unixbench_run
+    unixbench_run
 }
 
 mkdir -p $DIR/result/raw
