@@ -56,8 +56,8 @@ do
 	title3="$title3 udp_${len}_lat"
 	title4="$title4 udp_${len}_pps"
 done
-title2="$title2 $title3 $title4"
-title="$title $title2"
+#title2="$title2 $title3 $title4"
+title="$title $title4"
 if [ -f $RESULT_HOME/net.csv ]
 then
     tmp=`cat $RESULT_HOME/net.csv | grep tcp`
