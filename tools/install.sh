@@ -127,7 +127,7 @@ function all_install
 
     #5.install UnixBench
     #echo "=======>Step 5 : install UnixBench"
-    #unixbench_install    
+    unixbench_install    
 }
 
 #########################################################################################
