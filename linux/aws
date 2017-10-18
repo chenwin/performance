@@ -1,0 +1,7 @@
+修改密码
+sudo passwd root
+切换到root
+su -
+
+yum install git -y
+git clone https://github.com/chenwin/performance.git
