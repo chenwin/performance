@@ -20,3 +20,6 @@
     git config --global user.name "XXX"
     git config --global user.email "XXX"
     git push -u origin master
+    
+    删除
+    git rm -r UnixBench
