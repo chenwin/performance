@@ -5,4 +5,7 @@ su -
 
 yum install git -y
 git clone https://github.com/chenwin/performance.git
-或wget https://codeload.github.com/chenwin/performance/zip/master
+或
+yum install unzip -y
+wget https://codeload.github.com/chenwin/performance/zip/master
+unzip master
