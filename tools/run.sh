@@ -23,8 +23,8 @@ function geekbench3_run
     score_s=`grep "Geekbench Score"      $RESULT | awk '{print $3}'`
     score_m=`grep "Geekbench Score"      $RESULT | awk '{print $4}'`
     #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
-    echo $DATE-$CPU_INFO $int_s $float_s $int_m $float_m >> $DIR/result/geekbench.csv
-	echo "===>geekbench3 run successful,result in $DIR/result/geekbench3.csv,raw result in $DIR/result/raw/geekbench3..."
+    echo $DATE,$CPU_INFO,$int_s,$float_s,$int_m,$float_m,score_s,score_m >> $DIR/result/geekbench.csv
+	echo "===>geekbench3 run successful,result in $DIR/result/geekbench.csv,raw result in $DIR/result/raw/geekbench3..."
 }
 
 function fio_run
@@ -82,7 +82,7 @@ function stream_run
     scale_GB=`echo "scale=2;$scale/1024;" | bc`
     add_GB=`echo "scale=2;$add/1024;" | bc`
     triad_GB=`echo "scale=2;$triad/1024;" | bc`
-    echo "$copy_GB $scale_GB $add_GB $triad_GB" >> $DIR/result/stream.csv
+    echo "$copy_GB,$scale_GB,$add_GB,$triad_GB" >> $DIR/result/stream.csv
     
 }
 
