@@ -12,6 +12,10 @@ function geekbench3_run
 	mkdir -p $DIR/result/raw/geekbench3
 	DATE=`date +"%Y%m%d_%H%M%S"`
     RESULT=$DIR/result/raw/geekbench3/runlog-$DATE
+    if [ ! -f $DIR/result/geekbench.csv ]
+    then
+        echo "date,cpu,int,float,int_multi,float_multi,score,score_multi" > $DIR/result/geekbench.csv
+    fi
     ./geekbench_x86_64 -n | tee $RESULT
     
     int_s=`grep "Integer Score"        $RESULT | awk '{print $3}'` 
@@ -23,7 +27,7 @@ function geekbench3_run
     score_s=`grep "Geekbench Score"      $RESULT | awk '{print $3}'`
     score_m=`grep "Geekbench Score"      $RESULT | awk '{print $4}'`
     #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
-    echo $DATE,$CPU_INFO,$int_s,$float_s,$int_m,$float_m,score_s,score_m >> $DIR/result/geekbench.csv
+    echo "$DATE,$CPU_INFO,$int_s,$float_s,$int_m,$float_m,$score_s,$score_m" >> $DIR/result/geekbench.csv
 	echo "===>geekbench3 run successful,result in $DIR/result/geekbench.csv,raw result in $DIR/result/raw/geekbench3..."
 }
 
@@ -71,6 +75,10 @@ function stream_run
     DATE=`date +"%Y%m%d_%H%M%S"`
     mkdir -p $DIR/result/raw/stream
     RESULT=$DIR/result/raw/stream/runlog-$DATE
+    if [ ! -f $DIR/result/stream.csv ]
+    then
+        echo "Copy(GB/s),Scale,Add,Triad" > $DIR/result/stream.csv
+    fi
     
     stream | tee $RESULT
     
