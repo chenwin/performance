@@ -110,7 +110,7 @@ function unixbench_run
 function all_run
 {
     #1.netperf/qperf run
-    net_run
+    #net_run
     
     #2.run geekbench3
     geekbench3_run
@@ -122,7 +122,7 @@ function all_run
     stream_run
     
     #5.run unixbench
-    unixbench_run
+    #unixbench_run
 }
 
 mkdir -p $DIR/result/raw
