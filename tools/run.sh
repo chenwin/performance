@@ -31,7 +31,7 @@ function geekbench3_run
     score_s=`grep "Geekbench Score"      $RESULT | awk '{print $3}'`
     score_m=`grep "Geekbench Score"      $RESULT | awk '{print $4}'`
     #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
-    echo "date,cpu,int,float,int_multi,float_multi,score,score_multi" > $DIR/result/geekbench.csv
+    echo "$DATE,$CPU_INFO,$int_s,$float_s,$mem_s,$score_s,$int_m,$float_m,$mem_m,$score_m" >> $DIR/result/geekbench.csv
     
     avg_int_s=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$3} END {print sum/(NR-1)}'`
     avg_float_s=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$4} END {print sum/(NR-1)}'`
