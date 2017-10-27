@@ -14,7 +14,11 @@ function geekbench3_run
     RESULT=$DIR/result/raw/geekbench3/runlog-$DATE
     if [ ! -f $DIR/result/geekbench.csv ]
     then
-        echo "date,cpu,int,float,int_multi,float_multi,score,score_multi" > $DIR/result/geekbench.csv
+        echo "date,cpu,int,float,mem,score,int_multi,float_multi,mem_multi,score_multi" > $DIR/result/geekbench.csv
+    fi
+    if [ ! -f $DIR/result/geekbench-avg.csv ]
+    then
+        echo "int,float,int_multi,float_multi,score,score_multi" > $DIR/result/geekbench-avg.csv
     fi
     ./geekbench_x86_64 -n | tee $RESULT
     
@@ -27,8 +31,16 @@ function geekbench3_run
     score_s=`grep "Geekbench Score"      $RESULT | awk '{print $3}'`
     score_m=`grep "Geekbench Score"      $RESULT | awk '{print $4}'`
     #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
-    echo "$DATE,$CPU_INFO,$int_s,$float_s,$int_m,$float_m,$score_s,$score_m" >> $DIR/result/geekbench.csv
-	echo "===>geekbench3 run successful,result in $DIR/result/geekbench.csv,raw result in $DIR/result/raw/geekbench3..."
+    echo "date,cpu,int,float,int_multi,float_multi,score,score_multi" > $DIR/result/geekbench.csv
+    
+    avg_int_s=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$3} END {print sum/(NR-1)}'`
+    avg_float_s=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$4} END {print sum/(NR-1)}'`
+    avg_int_m=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$7} END {print sum/(NR-1)}'`
+    avg_float_m=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$8} END {print sum/(NR-1)}'`
+    avg_score_s=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$6} END {print sum/(NR-1)}'`
+    avg_score_m=`cat $DIR/result/geekbench.csv |awk -F',' '{sum+=$10} END {print sum/(NR-1)}'`
+    echo "$avg_int_s,$avg_float_s,$avg_int_m,$avg_float_m,$avg_score_s,$avg_score_m" >> $DIR/result/geekbench-avg.csv
+    echo "===>geekbench3 run successful,result in $DIR/result/geekbench.csv,raw result in $DIR/result/raw/geekbench3..."
 }
 
 function fio_run
@@ -142,54 +154,33 @@ do
     if [ $choice == 1 ]
 	then
 	    net_run
-		break
-	elif [ $choice == 2 ]
+	    break
+    elif [ $choice == 2 ]
 	then
 	    fio_run
-		break
-	elif [ $choice == 3 ]
+            break
+    elif [ $choice == 3 ]
 	then
 	    geekbench3_run
-		break
+	    break
     elif [ $choice == 4 ]
-    then
-        stream_run
-        break
+        then
+            stream_run
+            break
     elif [ $choice == 5 ]
-    then
-        unixbench_run
-        break
-	elif [ $choice == 6 ]
-	then
+        then
+            unixbench_run
+            break
+    elif [ $choice == 6 ]
+        then
 	    all_run
-		break
-	else
-	    echo "Sorry, your choice is not correct."
-		all_run
-		break
-	fi
+            break
+    else
+	echo "Sorry, your choice is not correct."
+        all_run
+	break
+    fi
 done
-
-#if [ $1 ]; then
-#    if [ $1 == "geek3" ]; then
-#         geekbench3_run
-#    elif [ $1 == "fio" ]; then
-#         fio_run
-#    elif [ $1 == "net" ]; then
-#         net_run
-#    elif [ $1 == "-h" -o $1 == "--help" ]; then
-#        echo "Usage: sh $0 [geek3|fio|net]"
-#	    echo "For example : sh $0 geek3"
-#        exit 1
-#    else
-#        echo "bad arg : $1...(~~)"
-#		echo "Usage: sh $0 [geek3|fio|net]"
-#	    echo "For example : sh $0 geek3"
-#        exit 1
-#    fi
-#else
-#    all_run
-#fi
 
 
 
