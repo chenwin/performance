@@ -89,7 +89,11 @@ function stream_run
     RESULT=$DIR/result/raw/stream/runlog-$DATE
     if [ ! -f $DIR/result/stream.csv ]
     then
-        echo "Copy(GB/s),Scale,Add,Triad" > $DIR/result/stream.csv
+        echo "Copy(MB/s),Scale,Add,Triad" > $DIR/result/stream.csv
+    fi
+    if [ ! -f $DIR/result/stream-avg.csv ]
+    then
+        echo "Copy(GB/s),Scale,Add,Triad" > $DIR/result/stream-avg.csv
     fi
     
     stream | tee $RESULT
@@ -98,12 +102,18 @@ function stream_run
     scale=`grep "Scale:"        $RESULT | awk -F " " '{print $2}'`
     add=`grep "Add:" $RESULT | awk -F " " '{print $2}'` 
     triad=`grep "Triad:" $RESULT | awk -F " " '{print $2}'`
-    copy_GB=`echo "scale=2;$copy/1024;" | bc`
-    scale_GB=`echo "scale=2;$scale/1024;" | bc`
-    add_GB=`echo "scale=2;$add/1024;" | bc`
-    triad_GB=`echo "scale=2;$triad/1024;" | bc`
-    echo "$copy_GB,$scale_GB,$add_GB,$triad_GB" >> $DIR/result/stream.csv
+    echo "$copy,$scale,$add,$triad" >> $DIR/result/stream.csv
+    #copy_GB=`echo "scale=2;$copy/1024;" | bc`
+    #scale_GB=`echo "scale=2;$scale/1024;" | bc`
+    #add_GB=`echo "scale=2;$add/1024;" | bc`
+    #triad_GB=`echo "scale=2;$triad/1024;" | bc`
+    #echo "$copy_GB,$scale_GB,$add_GB,$triad_GB" >> $DIR/result/stream.csv
     
+    avg_copy=`cat $DIR/result/stream.csv |awk -F',' '{sum+=$1} END {print sum/((NR-1)*1024)}'`
+    avg_scale=`cat $DIR/result/stream.csv |awk -F',' '{sum+=$2} END {print sum/((NR-1)*1024)}'`
+    avg_add=`cat $DIR/result/stream.csv |awk -F',' '{sum+=$3} END {print sum/((NR-1)*1024)}'`
+    avg_triad=`cat $DIR/result/stream.csv |awk -F',' '{sum+=$4} END {print sum/((NR-1)*1024)}'`
+    echo "$avg_copy,$avg_scale,$avg_add,$avg_triad" >> $DIR/result/stream-avg.csv  
 }
 
 function unixbench_run
@@ -150,7 +160,7 @@ echo "[6] all 4 test above"
 
 while true
 do
-    read -t 10 -p 'please choose:[1|2|3|4|5|6]' choice
+    read -t 5 -p 'please choose:[1|2|3|4|5|6]' choice
     if [ $choice == 1 ]
 	then
 	    net_run
