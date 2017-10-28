@@ -33,12 +33,12 @@ function geekbench3_run
     #$DATE-$CPU_INFO $int_s $float_s $mem_s $score_s $int_m $float_m $mem_m $score_m
     echo "$DATE,$CPU_INFO,$int_s,$float_s,$mem_s,$score_s,$int_m,$float_m,$mem_m,$score_m" >> $DIR/result/geekbench.csv
     
-    avg_int_s=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$3} END {print sum/NR}'`
-    avg_float_s=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$4} END {print sum/NR}'`
-    avg_int_m=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$7} END {print sum/NR}'`
-    avg_float_m=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$8} END {print sum/NR}'`
-    avg_score_s=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$6} END {print sum/NR}'`
-    avg_score_m=`cat $DIR/result/geekbench.csv |grep -v '1$' |awk -F',' '{sum+=$10} END {print sum/NR}'`
+    avg_int_s=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$3} END {print sum/NR}'`
+    avg_float_s=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$4} END {print sum/NR}'`
+    avg_int_m=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$7} END {print sum/NR}'`
+    avg_float_m=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$8} END {print sum/NR}'`
+    avg_score_s=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$6} END {print sum/NR}'`
+    avg_score_m=`cat $DIR/result/geekbench.csv |grep -v '^d' |awk -F',' '{sum+=$10} END {print sum/NR}'`
     echo "$avg_int_s,$avg_float_s,$avg_int_m,$avg_float_m,$avg_score_s,$avg_score_m" >> $DIR/result/geekbench-avg.csv
     echo "===>geekbench3 run successful,result in $DIR/result/geekbench.csv,raw result in $DIR/result/raw/geekbench3..."
 }
@@ -109,10 +109,10 @@ function stream_run
     #triad_GB=`echo "scale=2;$triad/1024;" | bc`
     #echo "$copy_GB,$scale_GB,$add_GB,$triad_GB" >> $DIR/result/stream.csv
     
-    avg_copy=`cat $DIR/result/stream.csv |grep -v '1$' |awk -F',' '{sum+=$1} END {print sum/(NR*1024)}'`
-    avg_scale=`cat $DIR/result/stream.csv |grep -v '1$' |awk -F',' '{sum+=$2} END {print sum/(NR*1024)}'`
-    avg_add=`cat $DIR/result/stream.csv |grep -v '1$' |awk -F',' '{sum+=$3} END {print sum/(NR*1024)}'`
-    avg_triad=`cat $DIR/result/stream.csv |grep -v '1$' |awk -F',' '{sum+=$4} END {print sum/(NR*1024)}'`
+    avg_copy=`cat $DIR/result/stream.csv |grep -v '^C' |awk -F',' '{sum+=$1} END {print sum/(NR*1024)}'`
+    avg_scale=`cat $DIR/result/stream.csv |grep -v '^C' |awk -F',' '{sum+=$2} END {print sum/(NR*1024)}'`
+    avg_add=`cat $DIR/result/stream.csv |grep -v '^C' |awk -F',' '{sum+=$3} END {print sum/(NR*1024)}'`
+    avg_triad=`cat $DIR/result/stream.csv |grep -v '^C' |awk -F',' '{sum+=$4} END {print sum/(NR*1024)}'`
     echo "$avg_copy,$avg_scale,$avg_add,$avg_triad" >> $DIR/result/stream-avg.csv  
 }
 
