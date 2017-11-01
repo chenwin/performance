@@ -3,6 +3,8 @@ echo -------------kernel--------------------
 cat /etc/sysctl.conf |grep -v '#'
 echo -------------limit--------------------
 cat /etc/security/limits.conf |grep -v '#'
+echo -------------virtualization--------------------
+dmidecode -s system-product-name
 echo -------------lscpu--------------------
 lscpu
 echo swappiness
