@@ -1,8 +1,13 @@
 #!/bin/sh
+echo -------------kernel--------------------
+cat /etc/sysctl.conf |grep -v '#'
+echo -------------limit--------------------
+cat /etc/security/limits.conf |grep -v '#'
+echo -------------lscpu--------------------
 lscpu
 echo swappiness
 cat /proc/sys/vm/swappiness
-echo ===========================================================================
+echo ===================================================================================================
 
 echo -------------CPU INFO--------------------
 cat /proc/cpuinfo
