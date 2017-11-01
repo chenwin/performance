@@ -7,9 +7,6 @@ echo ===========================================================================
 echo -------------CPU INFO--------------------
 cat /proc/cpuinfo
 sleep 2
-cat /proc/cpuinfo
-sleep 2
-cat /proc/cpuinfo
 
 if [ -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors ];then
 	cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
