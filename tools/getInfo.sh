@@ -1,4 +1,9 @@
 #!/bin/sh
+lscpu
+echo swappiness
+cat /proc/sys/vm/swappiness
+echo ===========================================================================
+
 echo -------------CPU INFO--------------------
 cat /proc/cpuinfo
 sleep 2
