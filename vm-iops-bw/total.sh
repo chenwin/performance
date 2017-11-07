@@ -12,8 +12,8 @@ do
   times=0
   for line in $(<dev.txt)
   do
-    sh do.sh $run_time $date_str $line $delay &
-        let times++
+    sh fio.sh $run_time $date_str $line $delay &
+    let times++
   done
   sleep $((($time+$delay)*6*$times+10*$times))
 done
