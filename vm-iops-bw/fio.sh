@@ -1,6 +1,7 @@
 run_time=$1
 date_str=$2
 dev=$3
+delay=$4
 
 sh 1.iops-8krandwrite.sh $run_time $date_str $dev
 sleep $delay
