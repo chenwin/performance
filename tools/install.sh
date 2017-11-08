@@ -83,7 +83,8 @@ function netperf_install
 function stream_install
 {
     cd $DIR/stream
-    gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=20000000 -o stream stream.c
+    gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=64000000 -DNTIME=20 -o stream stream.c
+    gcc -fopenmp -DSTREAM_ARRAY_SIZE=64000000 -DNTIME=20 -o stream.NOO3 stream.c
     chmod 755 stream
     cp stream /usr/bin/
     echo "===>stream install success"
