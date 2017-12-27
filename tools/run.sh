@@ -6,7 +6,7 @@ DIR="$( cd "$( dirname "$0"  )" && pwd  )"
 function geekbench3_run
 {
     echo "======>Running Geekbench3, please wait for about one minute..."
-    cd $DIR/geekbench3/dist/Geekbench-3.4.1-Linux
+    cd $DIR/geekbench3/dist/Geekbench-3.4.2-Linux
 	CPU_INFO=`cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F ":" '{print $2}'`
 	echo "CPUINFO= $CPU_INFO"
 	mkdir -p $DIR/result/raw/geekbench3
