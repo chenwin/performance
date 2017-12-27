@@ -29,8 +29,8 @@ function geekbench3_install
 	if [ -f dist -o -d dist ]; then
         rm -rf dist
     fi
-    tar -xvf Geekbench-3.4.1-Linux.tar.gz
-    cd dist/Geekbench-3.4.1-Linux
+    tar -xvf Geekbench-3.4.2-Linux.tar.gz
+    cd dist/Geekbench-3.4.2-Linux
     ./geekbench_x86_64 -r lhcici521@163.com qpp6g-kq4el-bo72w-mdngp-2kcvx-eu2uq-gjrkp-l5q7r-qi36y
     ./geekbench_x86_64 --sysinfo
     if [ $? -eq 0 ]; then
