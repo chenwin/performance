@@ -22,3 +22,5 @@ Combined:	1
 
 [root@az2 ~]# yum install epel-release
 [root@az2 ~]# yum install iperf
+
+yum --showduplicates list iperf| expand
