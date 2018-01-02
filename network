@@ -24,3 +24,5 @@ Combined:	1
 [root@az2 ~]# yum install iperf
 
 yum --showduplicates list iperf| expand
+
+https://sourceforge.net/projects/iperf/
