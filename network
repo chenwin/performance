@@ -21,8 +21,8 @@ Combined:	1
 [root@az2 ~]# ethtool -l eth0
 
 [root@az2 ~]# yum install epel-release
-[root@az2 ~]# yum install iperf
+[root@az2 ~]# yum install iperf3
 
-yum --showduplicates list iperf| expand
+yum --showduplicates list iperf3| expand
 
 https://sourceforge.net/projects/iperf/
