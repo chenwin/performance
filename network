@@ -1,0 +1,5 @@
+for i in `seq 5`
+ do qperf 192.168.0.229 -t 120 -m 64 -vvs tcp_lat | tee $i.ret
+done
+
+ping 192.168.0.229 -i 1 -c 120
