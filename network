@@ -3,3 +3,19 @@ for i in `seq 5`
 done
 
 ping 192.168.0.229 -i 1 -c 120
+
+[root@az2 ~]# ethtool -l eth0
+Channel parameters for eth0:
+Pre-set maximums:
+RX:		0
+TX:		0
+Other:		0
+Combined:	2
+Current hardware settings:
+RX:		0
+TX:		0
+Other:		0
+Combined:	1
+
+[root@az2 ~]# ethtool -L eth0 combined 2
+[root@az2 ~]# ethtool -l eth0
