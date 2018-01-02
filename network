@@ -19,3 +19,6 @@ Combined:	1
 
 [root@az2 ~]# ethtool -L eth0 combined 2
 [root@az2 ~]# ethtool -l eth0
+
+[root@az2 ~]# yum install epel-release
+[root@az2 ~]# yum install iperf
