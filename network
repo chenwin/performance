@@ -26,3 +26,33 @@ Combined:	1
 yum --showduplicates list iperf3| expand
 
 https://sourceforge.net/projects/iperf/
+
+
+公网EIP带宽
+https://github.com/sivel/speedtest-cli
+#git clone https://github.com/sivel/speedtest-cli.git
+#cd speedtest-cli
+#python speedtest.py install
+列出所有服务列表
+speedtest-cli --list
+
+speedtest-cli --list |tee 1.txt
+cat 1.txt |grep China
+
+4751) Beijing Telecom (Beijing, China) [1944.34 km]
+ 5145) Beijing Unicom (Beijing, China) [1944.34 km]
+ 6302) Beijing Fiber City (Beijing, China) [1944.34 km]
+ 5505) Beijing Broadband Network (Beijing, China) [1944.34 km]
+ 5992) Qinghai China Unicom (Xining, China) [1967.89 km]
+12512) nmzl (Huhehaote, China) [2048.10 km]
+ 5017) China Unicom,Liaoning Branch (Shenyang, China) [2320.11 km]
+ 5750) Lhasaunicom (Lhasa, China) [2427.21 km]
+ 9484) China Unicom (Changchun, China) [2586.12 km]
+10742) Changchun Unicom (Changchun, China) [2586.12 km]
+ 4525) Heilongjiang-CMCC (Harbin, China) [2818.29 km]
+ 5460) China Unicom Heilongjiang Branch (Harbin, China) [2818.29 km]
+ 6144) xjunicom (Urumqi, China) [3389.88 km]
+ 8554) Xinjiang Wireless Communication Co., Ltd. (Changji, China) [3423.40 km]
+ 
+测试指定server
+speedtest-cli --server 4751
