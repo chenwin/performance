@@ -9,3 +9,6 @@ git clone https://github.com/chenwin/performance.git
 yum install unzip -y
 wget https://codeload.github.com/chenwin/performance/zip/master
 unzip master
+
+使用 SSH 密钥对连接 Linux 实例
+https://help.aliyun.com/document_detail/51798.html?spm=5176.doc51792.2.12.xjMmBE
