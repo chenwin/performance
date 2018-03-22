@@ -1,5 +1,8 @@
 修改密码
 sudo passwd root
+输入当前用户密码
+输入root密码
+确认root密码
 切换到root
 su -
 
