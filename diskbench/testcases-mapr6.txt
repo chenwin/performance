@@ -1,0 +1,7 @@
+bs	iodepth	size	runtime	time_based	numjobs	offset	rw	rwmixread
+#初始化写操作
+#8k	1	1800G	120	1	1	0	randwrite	0
+#128k	32	100G	3600	0	1	0	write	0
+#size=0G，表示不设置size，测试全盘。size必须为整形
+1M	32	0G	300	1	1	0	write	0
+1M	32	0G	300	1	1	0	read	0

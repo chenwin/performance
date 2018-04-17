@@ -1,0 +1,3 @@
+bs	iodepth	size	runtime	time_based	numjobs	offset	rw	rwmixread
+#初始化写操作
+128k	32	100G	3600	0	1	0	write	0
