@@ -3,8 +3,34 @@ sudo passwd root
 输入当前用户密码
 输入root密码
 确认root密码
-切换到root
+切换到root，注意一定要用su -，千万别用su root，用户权限会过不去。。
 su -
+
+会导致如下问题，python里看到的用户不是root，而whoami是root
+===========================================================================
+[root@ip-172-31-4-75 home]# python
+Python 2.7.5 (default, Aug  4 2017, 00:39:18)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import getpass
+>>> import platform
+>>> print getpass.getuser()
+centos
+>>> print platform.system().lower().startswith('linux')
+True
+>>>
+[root@ip-172-31-4-75 home]# whoami
+root
+
+
+
+
+允许root登录
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+PasswordAuthentication yes
+
+service sshd restart
 
 yum install git -y
 git clone https://github.com/chenwin/performance.git
