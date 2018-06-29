@@ -6,6 +6,8 @@ sudo passwd root
 切换到root，注意一定要用su -，千万别用su root，用户权限会过不去。。
 su -
 
+清除桶
+https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/gsg/DeletingAnObjectandBucket.html
 会导致如下问题，python里看到的用户不是root，而whoami是root
 ===========================================================================
 [root@ip-172-31-4-75 home]# python
