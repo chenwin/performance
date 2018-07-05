@@ -1,10 +1,16 @@
-修改密码
+直接sudo su -，这样不需要root密码
+sudo su -
+
+
+================================================================
+修改密码（没必要这么做）
 sudo passwd root
 输入当前用户密码
 输入root密码
 确认root密码
 切换到root，注意一定要用su -，千万别用su root，用户权限会过不去。。
 su -
+======================================================================
 
 清除桶
 https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/gsg/DeletingAnObjectandBucket.html
