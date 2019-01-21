@@ -23,3 +23,6 @@
     
     删除
     git rm -r UnixBench
+
+# diskbench最新版
+https://github.com/bentu86/diskbench
